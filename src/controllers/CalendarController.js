@@ -40,27 +40,6 @@ class CalendarController {
             dt_start:dt_start,
             dt_end:dt_end
 		};
-
-		const auxCalender = await Calender.findOne({title});
-
-		if(auxCalender) 
-		{
-			console.log(dt_start,dt_end,auxCalender.dt_start)
-            
-			const available = CustomerController.isAvailable(
-				dt_start,
-				auxCalender.dt_start,
-				auxCalender.dt_end
-			  );
-			  
-			if(!available)
-			{
-				return 	res.status(200).json({
-					message: "Horário indisponível!",
-					error: true
-				});
-			}
-		}
 		
 		await new Calender(calender)
 			.save()

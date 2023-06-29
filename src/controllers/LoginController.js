@@ -9,7 +9,7 @@ class LoginController{
 
   async User(req, res) {
     const { emailPhone,password } = req.body;
-  
+
     try {
       console.log(emailPhone, password);
       const user = await User.findOne({ emailPhone });
@@ -18,9 +18,9 @@ class LoginController{
         console.log("Usuário não encontrado");
         return res.status(200).json({ error: true , message: "Usuário não encontrado!" });
       }
- 
+
         if(password === user.password )
-          return res.status(200).json({ error: false, message: "Usuário logado com sucesso!"});
+          return res.status(200).json({ error: false, message: "Usuário logado com sucesso!", user});
         else 
           return res.status(200).json({ error: true , message: "Senha incorreta!"});
     
